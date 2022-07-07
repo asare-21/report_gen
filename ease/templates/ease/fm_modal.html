@@ -1,0 +1,269 @@
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Kindly Input Inspection Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Station Officer</label>
+            <input type="text" name="station_officer" required class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Station Name</label>
+            <input type="text" name="name_of_station" required class="form-control" id="recipient-name">
+          </div>
+             <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Staff Strength</label>
+            <input type="number" name="station_name"  class="form-control" id="recipient-name">
+          </div>
+          {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Security post/desk and personnel for duration of station's daily broadcast operation:</label>
+            <select name="security_post" class="form-select" aria-label="Default select example">
+  <option value="False">False</option>
+  <option value="True">True</option>
+</select>
+          </div>
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">Security post/desk comment</label>
+            <textarea name="security_post_comment" class="form-control" id="message-text"></textarea>
+          </div>
+            {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Signpost for station installed</label>
+            <select name="signpost" class="form-select" aria-label="Default select example">
+  <option value="False">False</option>
+  <option value="True">True</option>
+</select>
+          </div>
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">Signpost for station installed comment</label>
+            <textarea name="signpost_comment" class="form-control" id="message-text"></textarea>
+          </div>
+{% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Permit from EPA approving mast/tower installation:</label>
+            <select name="epa" class="form-select" aria-label="Default select example">
+  <option value="False">False</option>
+  <option value="True">True</option>
+</select>
+          </div>
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">Permit from EPA approving mast/tower installation comment</label>
+            <textarea name="epa_comment" class="form-control" id="message-text"></textarea>
+          </div>
+        {% comment %}  {% endcomment %}
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Fire Extinguishers and Fire Certificate:</label>
+            <select name="fire" class="form-select" aria-label="Default select example">
+  <option value="False">False</option>
+  <option value="True">True</option>
+</select>
+          </div>
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">Fire Extinguishers and Fire Certificate Comment:</label>
+            <textarea name="fire_comment" class="form-control" id="message-text"></textarea>
+          </div>
+          {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Mast/tower(s) is/are properly earthed:</label>
+            <select name="earthed_mast" class="form-select" aria-label="Default select example">
+  <option value="False">False</option>
+  <option value="True">True</option>
+</select>
+
+          </div>
+           <div class="mb-3">
+            <label for="message-text" class="col-form-label">Mast/tower(s) is/are properly earthed comment:</label>
+            <textarea name="earthed_mast" class="form-control" id="message-text"></textarea>
+          </div>
+          {% comment %}  {% endcomment %}
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">Mast/tower(s) is/are painted to the specification described in the guidelines:</label>
+             <select name="mast_color" class="form-select" aria-label="Default select example">
+  <option value="False">False</option>
+  <option value="True">True</option>
+</select>
+          </div>
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">Mast/tower(s) is/are painted to the specification described in the guidelines comment:</label>
+            <textarea name="mast_color_comment" class="form-control" id="message-text"></textarea>
+          </div>
+          {% comment %}  {% endcomment %}
+                  <div class="mb-3">
+            <label for="message-text" class="col-form-label">Directional Antenna (Only if station is 45km from a neighbouring country) :</label>
+             <select name="directional_antenna" class="form-select" aria-label="Default select example">
+  <option value="False">False</option>
+  <option value="True">True</option>
+</select>
+          </div>
+            
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">Directional Antenna (Only if station is 45km from a neighbouring country) comment:</label>
+            <textarea name="directional_antenna" class="form-control" id="message-text"></textarea>
+          </div>
+          {% comment %}  {% endcomment %}
+           <div class="mb-3">
+            <label for="message-text" class="col-form-label">Cavity Filter Installed at output of transmitter :</label>
+             <select name="cavity" class="form-select" aria-label="Default select example">
+  <option value="False">False</option>
+  <option value="True">True</option>
+</select>
+          </div>
+            
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">Cavity Filter Installed at output of transmitter comment:</label>
+            <textarea name="cavity_comment" class="form-control" id="message-text"></textarea>
+          </div>
+          {% comment %}  {% endcomment %}
+           <div class="mb-3">
+            <label for="message-text" class="col-form-label">Backup Power Supply :</label>
+             <select name="backup" class="form-select" aria-label="Default select example">
+  <option value="False">False</option>
+  <option value="True">True</option>
+</select>
+          </div>
+            
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">Backup Power Supply comment:</label>
+            <textarea name="backup_comment" class="form-control" id="message-text"></textarea>
+          </div>
+          {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="message-text" class="col-form-label">Equipment List :</label>
+             <select name="equipment_list" class="form-select" aria-label="Default select example">
+  <option value="False">False</option>
+  <option value="True">True</option>
+</select>
+          </div>
+            
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">Equipment List comment:</label>
+            <textarea name="equipment_list_comment" class="form-control" id="message-text"></textarea>
+          </div>
+          {% comment %}  {% endcomment %}
+          {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="message-text" class="col-form-label">Funtional On-air Light :</label>
+             <select name="on_air" class="form-select" aria-label="Default select example">
+  <option value="False">False</option>
+  <option value="True">True</option>
+</select>
+          </div>
+            
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">Funtional On-air Light comment:</label>
+            <textarea name="on_air_comment" class="form-control" id="message-text"></textarea>
+          </div>
+          {% comment %}  {% endcomment %}
+          {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="message-text" class="col-form-label">Studio Well Ventilated Light :</label>
+             <select name="studio_ventilated" class="form-select" aria-label="Default select example">
+  <option value="False">False</option>
+  <option value="True">True</option>
+</select>
+          </div>
+            
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">Studio Well Ventilated Light comment:</label>
+            <textaread name="studio_ventilated_comment" class="form-control" id="message-text"></textarea>
+          </div>
+          {% comment %}  {% endcomment %}
+          {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="message-text" class="col-form-label">Acoustic panels present in studio :</label>
+             <select name="acoustic_panels" class="form-select" aria-label="Default select example">
+  <option value="False">False</option>
+  <option value="True">True</option>
+</select>
+          </div>
+            
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">Acoustic panels present in studio comment:</label>
+            <textarea name="acoustic_panels_comment" class="form-control" id="message-text"></textarea>
+          </div>
+          {% comment %}  {% endcomment %}
+          {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="message-text" class="col-form-label">Secure studio entrance in studio :</label>
+             <select name="secure_studio" class="form-select" aria-label="Default select example">
+  <option value="False">False</option>
+  <option value="True">True</option>
+</select>
+          </div>
+            
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">Secure studio entrance in studio comment:</label>
+            <textarea name="secure_studio_comment" class="form-control" id="message-text"></textarea>
+          </div>
+          {% comment %}  {% endcomment %}
+          {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="message-text" class="col-form-label">Reception :</label>
+             <select name="reception" class="form-select" aria-label="Default select example">
+  <option value="False">False</option>
+  <option value="True">True</option>
+</select>
+          </div>
+            
+             <div class="mb-3">
+            <label for="message-text" class="col-form-label">Reception comment:</label>
+            <textarea name="reception_comment" class="form-control" id="message-text"></textarea>
+          </div>
+          {% comment %}  {% endcomment %}
+          {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="message-text" class="col-form-label">Mast Height:</label>
+            <input type="number" name="mast_height" class="form-control" id="message-text">
+          </div>
+          {% comment %}  {% endcomment %}
+          {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="message-text" class="col-form-label">Antenna gain (dB):</label>
+            <input type="number" name="gain" class="form-control" id="message-text">
+          </div>
+          {% comment %}  {% endcomment %}
+          {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="message-text" class="col-form-label">Make and model of transmitter:</label>
+            <input type="text" name="make_model" class="form-control" id="message-text">
+          </div>
+          {% comment %}  {% endcomment %}
+          {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="message-text" class="col-form-label">Operating Frequency:</label>
+            <input type="number" name="frequency" class="form-control" id="message-text">
+          </div>
+          {% comment %}  {% endcomment %}
+          {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="message-text" class="col-form-label">Antenna Physical Location:</label>
+            <input type="text" name="physical_location"  class="form-control" id="message-text">
+          </div>
+          {% comment %}  {% endcomment %}
+          {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="message-text" class="col-form-label">Station's Coords:</label>
+            <input type="text" name="station_coords"  class="form-control" id="message-text">
+          </div>
+          {% comment %}  {% endcomment %}
+          {% comment %}  {% endcomment %}
+            <div class="mb-3">
+            <label for="message-text" class="col-form-label">Comments :</label>
+            <textarea class="form-control" name="comments" id="message-text"></textarea>
+          </div>
+          {% comment %}  {% endcomment %}
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

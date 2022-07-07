@@ -16,7 +16,7 @@ Including another URLconf
 from cmath import e
 from django.contrib import admin
 from django.urls import path,include
-
+from .settings import DEBUG
 
 urlpatterns = [
     path('admin/', admin.site.urls),
