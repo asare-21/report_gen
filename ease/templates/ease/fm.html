@@ -2,7 +2,6 @@
 <html lang="en">
 {%load static%}
 {%include "ease/header.html"%}
-
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -12,7 +11,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{%url "index"%}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -228,9 +227,7 @@
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                             </div>
                         </li>
-
                         <div class="topbar-divider d-none d-sm-block"></div>
-
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -250,9 +247,8 @@
                                     <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Settings
                                 </a>
-                               
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="{%url "logout"%}" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -260,23 +256,15 @@
                         </li>
 
                     </ul>
-
                     {%include "ease/fm_modal.html"%}
-
                 </nav>
-                <!-- End of Topbar -->
-
-                <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">FM Inspection Reports</h1>
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-edit fa-sm text-white-50"></i> Create Report</button>
                     </div>
 
-                    <!-- Content Row -->
                     <div class="row">
                         {% if fm_models%}
                            {% for fm in fm_models  %}
@@ -327,30 +315,17 @@
 
                   
                     </div>
-
-                 
-
                 </div>
-                <!-- /.container-fluid -->
+
 
             </div>
-            <!-- End of Main Content -->
-
-            <!-- Footer -->
-           
-            <!-- End of Footer -->
 
         </div>
-        <!-- End of Content Wrapper -->
 
     </div>
-    <!-- End of Page Wrapper -->
-
-    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
 
  {%include "ease/footer.html"%}
 

@@ -51,10 +51,11 @@ def logout_(request):
     logout(request)
     return redirect('login')
 
+
 def register(request):
     if request.user.is_authenticated:
         return redirect("index")
-    try:    
+    try:
         if request.method == 'POST':
             # a user is creating an account
             # create a new user
@@ -84,13 +85,15 @@ def register(request):
             nsp = UserModel(user=user, nsp=True)
             nsp.save()
             # send login details to user
-            user = {'username': username, 'password': password, 'email': email, 'phone': phone}
-          
+            user = {'username': username, 'password': password,
+                    'email': email, 'phone': phone}
+
             return redirect('login')
         return render(request, 'ease/register.html')
     except Exception as e:
         print(e)
         return render(request, 'ease/register.html', {'error': 'Something went wrong'})
+
 
 def notFound(request, exception):
     response = render(
@@ -127,18 +130,54 @@ def fm_general(request):
     if request.method == 'POST':
         # a user is creating an account
         # create a new user
-        title = request.POST.get('title')
-        description = request.POST.get('description')
-        
-        if completed == 'on':
-            completed = True
-        else:
-            completed = False
+        station_officer = request.POST.get('station_officer')
+        station_name = request.POST.get('station_name')
+        staff_stength = request.POST.get('staff_strength')
+        security_post = request.POST.get('security_post')
+        security_post_comment = request.POST.get('security_post_comment')
+        signpost = request.POST.get('signpost')
+        signpost_comment = request.POST.get('signpost_comment')
+        epa = request.POST.get('epa')
+        epa_comment = request.POST.get('epa_comment')
+        fire = request.POST.get('fire')
+        fire_comment = request.POST.get('fire_comment')
+        earthed_mast = request.POST.get('earthed_mast')
+        earthed_mast_comment = request.POST.get('earthed_mast_comment')
+        mast_color = request.POST.get('mast_color')
+        mast_color_comment = request.POST.get('mast_color_comment')
+        directional_antenna = request.POST.get('directional_antenna')
+        directional_antenna_comment = request.POST.get(
+            'directional_antenna_comment')
+        cavity = request.POST.get('cavity')
+        cavity_comment = request.POST.get('cavity_comment')
+        backup = request.POST.get('backup')
+        backup_comment = request.POST.get('backup_comment')
+        equipment_list = request.POST.get('equipment_list')
+        equipment_list_comment = request.POST.get('equipment_list_comment')
+        on_air = request.POST.get('on_air')
+        on_air_comment = request.POST.get('on_air_comment')
+        studio_ventilated = request.POST.get('studio_ventilated')
+        studio_ventilated_comment = request.POST.get(
+            'studio_ventilated_comment')
+        acoustic_panels = request.POST.get('acoustic_panels')
+        acoustic_panels_comment = request.POST.get('acoustic_panels_comment')
+        secure_studio = request.POST.get('secure_studio')
+        secure_studio_comment = request.POST.get('secure_studio_comment')
+        reception = request.POST.get('reception')
+        reception_comment = request.POST.get('reception_comment')
+        mast_height = request.POST.get('mast_height')
+        antenna_gain = request.POST.get('antenna_gain')
+        make_model_antenna = request.POST.get('make_model')
+        frequency = request.POST.get('frequency')
+        physical_location = request.POST.get('physical_location')
+        station_coords = request.POST.get('station_coords')
+        comments = request.POST.get('comments')
         # create NSP Model and Link to user
-        fm_model = FMModel(title=title, description=description, completed=completed)
+        fm_model = FMModel(name_of_station=station_name, station_officer=station_officer, staff_stength=staff_stength, security_post=security_post, signage_board=signpost,
+                           signage_board_comment=signpost_comment, epa_permit=epa, epa_permit_comment=epa_comment, fire_permit=fire, fire_permit_comment=fire_comment)
         fm_model.save()
         return redirect('fm_general')
-    return render(request, 'ease/fm.html', {'fm_models': fm_models,'user': request.user})
+    return render(request, 'ease/fm.html', {'fm_models': fm_models, 'user': request.user})
 
 
 @login_required(login_url=LOGIN_URL, redirect_field_name=REDIRECT_FIELD_NAME)
@@ -147,12 +186,12 @@ def fm_single(request, id):
         fm = FMModel.objects.get(id=id)
         return render(request, 'ease/fm_single.html', {'fm': fm})
     except Exception as e:
-        return render(request, 'ease/fm_single.html',{'error': 'Something went wrong'})
+        return render(request, 'ease/fm_single.html', {'error': 'Something went wrong'})
 
 
 @login_required(login_url=LOGIN_URL, redirect_field_name=REDIRECT_FIELD_NAME)
 def tv_general(request):
-    return render(request, 'ease/tv_general.html')
+    return render(request, 'ease/tv.html')
 
 
 @login_required(login_url=LOGIN_URL, redirect_field_name=REDIRECT_FIELD_NAME)
