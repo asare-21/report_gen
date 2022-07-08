@@ -20,7 +20,15 @@
 
     <!-- Page level plugins -->
     <script src="{%static "vendor/chart.js/Chart.min.js"%}"></script>
-
+    <script type="text/javascript">
+        const fmModels = JSON.parse(`{{ fm_models_serialize | safe }}`)
+    </script>
+    <script src="{%static "js/fm.js"%}"></script>
+    <!--optional polyfill for promise-->
+<script src="https://unpkg.com/promise-polyfill/dist/polyfill.min.js"></script>
+<!--lib uses jszip-->
+<script src="https://unpkg.com/jszip/dist/jszip.min.js"></script>
+<script src="{%static "node_modules/docx-preview/dist/docx-preview.min.js"%}"></script>
     <!-- Page level custom scripts -->
     <script src="{%static "js/demo/chart-area-demo.js"%}"></script>
     <script src="{%static "js/demo/chart-pie-demo.js"%}"></script>

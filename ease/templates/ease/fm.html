@@ -268,23 +268,27 @@
                     <div class="row">
                         {% if fm_models%}
                            {% for fm in fm_models  %}
-                              <a href="{%url 'fm_single' fm.id %}">
-                            <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-primary shadow h-100 py-2">
+                     
+
+                        <div class="col-xl-3 col-md-6 mb-4 " style="cursor:pointer;" >
+                            <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                First Time Inspection: Nyce Fm</div>
-                                            <div class="h5 mb-0  text-gray-800">{% if completed %}Complete{% else %}Incomplete{% endif %}</div>
+                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1 station" id="{{fm.id}}">
+                                                <a href="#">{{fm.name_of_station}}</a></div>
+                                            <div class="h5 mb-0 font-weight text-gray">{% if completed %}Complete{% else %}Incomplete{% endif %}</div>
                                         </div>
-                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                {{date}}</div>
+                                        <div class="col-auto">
+                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                        </div>
                                     </div>
+                                        <code class="text-success" >@{{fm.created_by}}</code> <br>
+                                        <code>Date: {{fm.created_at}}</code>
                                 </div>
                             </div>
                         </div>
-                            <a/>
+
                             {% endfor %}
                         {% else %}
                         
@@ -328,7 +332,6 @@
     </a>
 
  {%include "ease/footer.html"%}
-
 </body>
 
 </html>

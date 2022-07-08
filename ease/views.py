@@ -8,6 +8,8 @@ from django.template import RequestContext
 import unames
 import requests
 from asgiref.sync import sync_to_async
+from django.core import serializers
+
 
 LOGIN_URL = 'login/'
 REDIRECT_FIELD_NAME = 'login'
@@ -126,7 +128,8 @@ def error500(request):
 @login_required(login_url=LOGIN_URL, redirect_field_name=REDIRECT_FIELD_NAME)
 def fm_general(request):
     # fetch all fm models
-    fm_models = FMModel.objects.all()
+    fm_models = FMModel.objects.all().order_by('created_at')
+    fm_models_serialized = serializers.serialize("json", fm_models)
     if request.method == 'POST':
         # a user is creating an account
         # create a new user
@@ -177,7 +180,7 @@ def fm_general(request):
                            signage_board_comment=signpost_comment, epa_permit=epa, epa_permit_comment=epa_comment, fire_permit=fire, fire_permit_comment=fire_comment)
         fm_model.save()
         return redirect('fm_general')
-    return render(request, 'ease/fm.html', {'fm_models': fm_models, 'user': request.user})
+    return render(request, 'ease/fm.html', {'fm_models': fm_models, 'user': request.user, 'fm_models_serialize': fm_models_serialized})
 
 
 @login_required(login_url=LOGIN_URL, redirect_field_name=REDIRECT_FIELD_NAME)
