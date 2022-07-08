@@ -1,12 +1,14 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
+from ease.helpers import docxToPdf
 from .models import UserModel, FMModel, TVModel
 from django.contrib.auth.models import User
 from django.http import Http404
 from django.template import RequestContext
 import unames
 import requests
+import asyncio
 from asgiref.sync import sync_to_async
 from django.core import serializers
 
@@ -128,6 +130,7 @@ def error500(request):
 @login_required(login_url=LOGIN_URL, redirect_field_name=REDIRECT_FIELD_NAME)
 def fm_general(request):
     # fetch all fm models
+    asyncio.run(docxToPdf("Fresh FM"))
     fm_models = FMModel.objects.all().order_by('created_at')
     fm_models_serialized = serializers.serialize("json", fm_models)
     if request.method == 'POST':

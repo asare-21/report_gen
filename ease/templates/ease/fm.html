@@ -264,12 +264,9 @@
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                 class="fas fa-edit fa-sm text-white-50"></i> Create Report</button>
                     </div>
-
                     <div class="row">
                         {% if fm_models%}
                            {% for fm in fm_models  %}
-                     
-
                         <div class="col-xl-3 col-md-6 mb-4 " style="cursor:pointer;" >
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
@@ -277,10 +274,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1 station" id="{{fm.id}}">
                                                 <a href="#">{{fm.name_of_station}}</a></div>
-                                            <div class="h5 mb-0 font-weight text-gray">{% if completed %}Complete{% else %}Incomplete{% endif %}</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                            <div class="p mb-0 font-weight text-gray">{% if completed %}<code class="text-success">Complete</code>{% else %}<code class="text-danger">Incomplete</code>{% endif %}</div>
                                         </div>
                                     </div>
                                         <code class="text-success" >@{{fm.created_by}}</code> <br>
