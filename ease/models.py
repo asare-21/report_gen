@@ -13,6 +13,18 @@ class UserModel(models.Model):
         return self.user.first_name
 
 
+class NotificationModel(models.Model):
+    # link to the user model
+    user = models.OneToOneField('auth.User', on_delete=models.CASCADE)
+    message = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    seen = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user.first_name}  Message: {self.message}"
+
+
 class FMModel(models.Model):
     # link to the user model
     created_by = models.ForeignKey('auth.User', on_delete=models.CASCADE)
@@ -53,7 +65,8 @@ class FMModel(models.Model):
     on_air_lighting = models.BooleanField(default=False)
     on_air_lighting_comment = models.TextField(default='', blank=True)
     ventillation_equipment = models.BooleanField(default=False)
-    ventillation_equipment_comment = models.TextField(default='', blank=True)
+    ventillation_equipment_comment = models.TextField(
+        default='', blank=True, null=True)
     acoustic_panel = models.BooleanField(default=False)
     acoustic_panel_comment = models.TextField(default='', blank=True)
     secure_door = models.BooleanField(default=False)

@@ -4,6 +4,7 @@ function selectStation(reportId) {
     const title = document.getElementById("staticBackdropLabel")
     const body = document.querySelector(".staticBody")
     const object = document.createElement('object')
+    body.innerHTML = ""
     body.textContent = ""
     // object.data = `/static/files/${e.pk}.pdf`
     object.data = `/static/files/Northumbria London Campus - Your Conditional Offer.pdf`

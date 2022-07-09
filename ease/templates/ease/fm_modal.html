@@ -1,13 +1,16 @@
 {%include "ease/logout_modal.html"%}
-
+{%load static%}
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Kindly Input Inspection Details</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img class="img-fluid " src="{%static "img/close.png"%}" /></button>
+
       </div>
       <div class="modal-body">
-        <form>
+        <form method="POST">
+          {% csrf_token %}
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Station Officer</label>
             <input type="text" name="station_officer" required class="form-control" id="recipient-name">
@@ -258,12 +261,13 @@
             <textarea class="form-control" name="comments" id="message-text"></textarea>
           </div>
           {% comment %}  {% endcomment %}
-        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
+        <button type="submit"  class="btn btn-primary">Save</button>
       </div>
+        </form>
+
     </div>
   </div>
 </div>
@@ -274,7 +278,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-close"></i></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><img class="img-fluid " src="{%static "img/close.png"%}" /></button>
       </div>
       <div class="modal-body staticBody">
       

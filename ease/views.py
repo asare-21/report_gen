@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from ease.helpers import docxToPdf
-from .models import UserModel, FMModel, TVModel
+from .models import UserModel, FMModel, TVModel, NotificationModel
 from django.contrib.auth.models import User
 from django.http import Http404
 from django.template import RequestContext
@@ -25,8 +25,12 @@ def index(request):
     ) + TVModel.objects.filter(completed=True).count()
     pending = FMModel.objects.filter(completed=False).count(
     ) + TVModel.objects.filter(completed=False).count()
-    print(completed, pending)
-    data = {'user': request.user, 'completed': completed, 'pending': pending}
+    notification_count = NotificationModel.objects.filter(
+        user=request.user, seen=False).count()
+    notifications = NotificationModel.objects.filter(
+        user=request.user, seen=False).order_by('created_at')
+    data = {'user': request.user, 'completed': completed, 'pending': pending,
+            'notification_count': notification_count, 'notifications': notifications}
     return render(request, 'ease/index.html', data)
 
 
@@ -69,8 +73,7 @@ def register(request):
             password = request.POST.get('password')
             password_confirm = request.POST.get('repeat_password')
             phone = request.POST.get('phone')
-            first_name_list = first_name.split()
-            last_name_list = last_name.split()
+
             username = request.POST.get('username')
             existing_user = User.objects.filter(email=email).exists()
             existing_username = User.objects.filter(username=username).exists()
@@ -130,60 +133,71 @@ def error500(request):
 @login_required(login_url=LOGIN_URL, redirect_field_name=REDIRECT_FIELD_NAME)
 def fm_general(request):
     # fetch all fm models
-    asyncio.run(docxToPdf("Fresh FM"))
-    fm_models = FMModel.objects.all().order_by('created_at')
-    fm_models_serialized = serializers.serialize("json", fm_models)
-    if request.method == 'POST':
-        # a user is creating an account
-        # create a new user
-        station_officer = request.POST.get('station_officer')
-        station_name = request.POST.get('station_name')
-        staff_stength = request.POST.get('staff_strength')
-        security_post = request.POST.get('security_post')
-        security_post_comment = request.POST.get('security_post_comment')
-        signpost = request.POST.get('signpost')
-        signpost_comment = request.POST.get('signpost_comment')
-        epa = request.POST.get('epa')
-        epa_comment = request.POST.get('epa_comment')
-        fire = request.POST.get('fire')
-        fire_comment = request.POST.get('fire_comment')
-        earthed_mast = request.POST.get('earthed_mast')
-        earthed_mast_comment = request.POST.get('earthed_mast_comment')
-        mast_color = request.POST.get('mast_color')
-        mast_color_comment = request.POST.get('mast_color_comment')
-        directional_antenna = request.POST.get('directional_antenna')
-        directional_antenna_comment = request.POST.get(
-            'directional_antenna_comment')
-        cavity = request.POST.get('cavity')
-        cavity_comment = request.POST.get('cavity_comment')
-        backup = request.POST.get('backup')
-        backup_comment = request.POST.get('backup_comment')
-        equipment_list = request.POST.get('equipment_list')
-        equipment_list_comment = request.POST.get('equipment_list_comment')
-        on_air = request.POST.get('on_air')
-        on_air_comment = request.POST.get('on_air_comment')
-        studio_ventilated = request.POST.get('studio_ventilated')
-        studio_ventilated_comment = request.POST.get(
-            'studio_ventilated_comment')
-        acoustic_panels = request.POST.get('acoustic_panels')
-        acoustic_panels_comment = request.POST.get('acoustic_panels_comment')
-        secure_studio = request.POST.get('secure_studio')
-        secure_studio_comment = request.POST.get('secure_studio_comment')
-        reception = request.POST.get('reception')
-        reception_comment = request.POST.get('reception_comment')
-        mast_height = request.POST.get('mast_height')
-        antenna_gain = request.POST.get('antenna_gain')
-        make_model_antenna = request.POST.get('make_model')
-        frequency = request.POST.get('frequency')
-        physical_location = request.POST.get('physical_location')
-        station_coords = request.POST.get('station_coords')
-        comments = request.POST.get('comments')
-        # create NSP Model and Link to user
-        fm_model = FMModel(name_of_station=station_name, station_officer=station_officer, staff_stength=staff_stength, security_post=security_post, signage_board=signpost,
-                           signage_board_comment=signpost_comment, epa_permit=epa, epa_permit_comment=epa_comment, fire_permit=fire, fire_permit_comment=fire_comment)
-        fm_model.save()
-        return redirect('fm_general')
-    return render(request, 'ease/fm.html', {'fm_models': fm_models, 'user': request.user, 'fm_models_serialize': fm_models_serialized})
+    try:
+        fm_models = FMModel.objects.all().order_by('created_at')
+        fm_models_serialized = serializers.serialize("json", fm_models)
+        notification_count = NotificationModel.objects.filter(
+            user=request.user, seen=False).count()
+        notifications = NotificationModel.objects.filter(
+            user=request.user, seen=False).order_by('created_at')
+        if request.method == 'POST':
+            # a user is creating an account
+            # create a new user
+            station_officer = request.POST.get('station_officer')
+            station_name = request.POST.get('station_name')
+            staff_stength = request.POST.get('staff_strength')
+            security_post = request.POST.get('security_post')
+            security_post_comment = request.POST.get('security_post_comment')
+            signpost = request.POST.get('signpost')
+            signpost_comment = request.POST.get('signpost_comment')
+            epa = request.POST.get('epa')
+            epa_comment = request.POST.get('epa_comment')
+            fire = request.POST.get('fire')
+            fire_comment = request.POST.get('fire_comment')
+            earthed_mast = request.POST.get('earthed_mast')
+            earthed_mast_comment = request.POST.get('earthed_mast_comment')
+            mast_color = request.POST.get('mast_color')
+            mast_color_comment = request.POST.get('mast_color_comment')
+            directional_antenna = request.POST.get('directional_antenna')
+            directional_antenna_comment = request.POST.get(
+                'directional_antenna_comment')
+            cavity = request.POST.get('cavity')
+            cavity_comment = request.POST.get('cavity_comment')
+            backup = request.POST.get('backup')
+            backup_comment = request.POST.get('backup_comment')
+            equipment_list = request.POST.get('equipment_list')
+            equipment_list_comment = request.POST.get('equipment_list_comment')
+            on_air = request.POST.get('on_air')
+            on_air_comment = request.POST.get('on_air_comment')
+            studio_ventilated = request.POST.get('studio_ventilated')
+            studio_ventilated_comment = request.POST.get(
+                'studio_ventilated_comment')
+            acoustic_panels = request.POST.get('acoustic_panels')
+            acoustic_panels_comment = request.POST.get(
+                'acoustic_panels_comment')
+            secure_studio = request.POST.get('secure_studio')
+            secure_studio_comment = request.POST.get('secure_studio_comment')
+            reception = request.POST.get('reception')
+            reception_comment = request.POST.get('reception_comment')
+            mast_height = 0 if request.POST.get(
+                'mast_height') == "" else int(request.POST.get('mast_height'))
+            antenna_gain = 0 if request.POST.get(
+                'antenna_gain') == "" else int(request.POST.get('gain'))
+            make_model_antenna = request.POST.get('make_model')
+            frequency = 0 if request.POST.get(
+                'frequency') == "" else int(request.POST.get('frequency'))
+            physical_location = request.POST.get('physical_location')
+            station_coords = request.POST.get('station_coords')
+            comments = request.POST.get('comments')
+            # create FM model
+            fm_model = FMModel(created_by=request.user, comments_remarks=comments, coords=station_coords,
+                               physical_location=physical_location, operating_frequency=frequency, make_and_model_antenna=make_model_antenna, antenna_gain=antenna_gain, mast_height=mast_height, reception_comment=reception_comment, reception=reception, secure_door_comment=secure_studio_comment, secure_door=secure_studio, acoustic_panel=acoustic_panels, acoustic_panel_comment=acoustic_panels_comment, ventillation_equipment=studio_ventilated, ventillation_equipment_comment=studio_ventilated_comment, on_air_lighting=on_air, on_air_lighting_comment=on_air_comment, equipment_sheet=equipment_list, equipment_sheet_comment=equipment_list_comment, backup_power=backup, backup_power_comment=backup_comment, cavity_filter=cavity, cavity_filter_comment=cavity_comment, directional_antenna=directional_antenna, directional_antenna_comment=directional_antenna_comment, mast_right_colors=mast_color, mast_right_colors_comment=mast_color_comment, mast_earthed=earthed_mast, mast_earthed_comment=earthed_mast_comment, name_of_station=station_name, station_officer=station_officer, staff_strength=staff_stength, security_post=security_post, security_post_comment=security_post_comment,   epa_permit=epa, epa_permit_comment=epa_comment, signage_board=signpost, signage_board_comment=signpost_comment)
+            fm_model.save()
+            return redirect('fm_general')
+        return render(request, 'ease/fm.html', {'fm_models': fm_models, 'user': request.user, 'fm_models_serialize': fm_models_serialized, 'notification_count': notification_count, 'notifications': notifications})
+    except Exception as e:
+        print(e)
+        return render(request, 'ease/fm.html', {'error': "Something went wrong"})
 
 
 @login_required(login_url=LOGIN_URL, redirect_field_name=REDIRECT_FIELD_NAME)
@@ -197,7 +211,11 @@ def fm_single(request, id):
 
 @login_required(login_url=LOGIN_URL, redirect_field_name=REDIRECT_FIELD_NAME)
 def tv_general(request):
-    return render(request, 'ease/tv.html')
+    notification_count = NotificationModel.objects.filter(
+        user=request.user, seen=False).count()
+    notifications = NotificationModel.objects.filter(
+        user=request.user, seen=False).order_by('created_at')
+    return render(request, 'ease/tv.html', {'user': request.user, 'notification_count': notification_count, 'notifications': notifications})
 
 
 @login_required(login_url=LOGIN_URL, redirect_field_name=REDIRECT_FIELD_NAME)

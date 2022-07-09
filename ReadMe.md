@@ -22,6 +22,8 @@ pip install -r requirements.txt
 python3 manage.py runserver
 ```
 
+### Runs Best On Chrome and Edge. Issues face when running on safari
+
 ## Features
 1. View memo/reports in browser
 2. Communicate with colleagues
