@@ -35,12 +35,14 @@ python3 manage.py runserver
 1. Insert Report Pictures
 2. Adjust Report Automatically to suite the type of inspection
 3. Add AI if possible to make the process smart and smooth
+4. Algorithm to check percentage of report left
 
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

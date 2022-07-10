@@ -29,8 +29,12 @@ def index(request):
         user=request.user, seen=False).count()
     notifications = NotificationModel.objects.filter(
         user=request.user, seen=False).order_by('created_at')
+    pending_fm = FMModel.objects.filter(completed=False)
+    pending_tv = TVModel.objects.filter(completed=False)
+    # spread operator inserts the content of the lists
+    pending_reports = [*pending_fm, *pending_tv]
     data = {'user': request.user, 'completed': completed, 'pending': pending,
-            'notification_count': notification_count, 'notifications': notifications}
+            'notification_count': notification_count, 'notifications': notifications, 'pending_reports': pending_reports}
     return render(request, 'ease/index.html', data)
 
 
