@@ -24,5 +24,3 @@ async def docxToPdf(file_id):
                     output_path=f"{file_id}.pdf", keep_active=True)
     except Exception as e:
         print(e)
-
-asyncio.run(docxToPdf("Fresh FM"))

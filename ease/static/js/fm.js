@@ -7,7 +7,7 @@ function selectStation(reportId) {
     body.innerHTML = ""
     body.textContent = ""
     // object.data = `/static/files/${e.pk}.pdf`
-    object.data = `/static/files/Northumbria London Campus - Your Conditional Offer.pdf`
+    object.data = `/static/files/pdf.pdf`
     object.type = "application/pdf"
     object.classList = "modal-content"
     object.height = 800

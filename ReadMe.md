@@ -24,6 +24,8 @@ python3 manage.py runserver
 
 ### Runs Best On Chrome and Edge. Issues faced when running on safari
 
+# PDF Generationg works only if MSWord installed on host machine
+
 ## Features
 1. View memo/reports in browser
 2. Communicate with colleagues
